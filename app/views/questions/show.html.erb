@@ -19,7 +19,32 @@
   <%= clearfix %>
 </div>
 
+<% if @question.best_answer != nil %>
+<div class="message">
+    <div id="messageOwner">
+      <%= image_tag "avatar.png" %>
+    </div>
+    <div id="messageBody">
+      <p class="metadata">
+        <span class="medal"><%= image_tag "medal_gold.png" %> [Best Answer] </span>
+        <span class="owner"><%= @question.best_answer.owner.name %></span>
+        <span class="time"><%= time_ago_in_words @question.best_answer.created_at %></span>
+        <%= actions_for_answer(@question, @question.best_answer) %>
+      </p>
+
+      <%= @question.best_answer.body %>
+    </div>
+
+    <%= clearfix %>
+</div>
+<% end %>
+
 <% @question.answers.each do |answer| %>
+<%
+  if answer == @question.best_answer
+    next
+  end
+%>
   <div class="message">
 
     <div id="messageOwner">
@@ -30,6 +55,7 @@
       <p class="metadata">
         <span class="owner"><%= answer.owner.name %></span>
         <span class="time"><%= time_ago_in_words answer.created_at %></span>
+        <%= actions_for_answer(@question, answer) %>
       </p>
 
       <%= answer.body %>
@@ -41,6 +67,7 @@
 
 <% if signed_in? %>
   <div class="answerForm">
-    <%= render "answers/form", question: @question, answer: Answer.new %>
+    <%= render "answers/form2", question: @question, answer: Answer.new %>
   </div>
 <% end %>
+

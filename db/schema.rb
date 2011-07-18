@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20110618054312) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "best_answer_id"
   end
 
   create_table "users", :force => true do |t|

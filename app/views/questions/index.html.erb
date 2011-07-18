@@ -6,9 +6,15 @@
       <h4><%= link_to question.title, question %></h4>
 
       <p class="metadata">
-        <span class="answersCount">2 replies</span>,
-        latest by <span class="questionAuthor">Jonh Doe</span> on
-        <span class="time">Jun 16, 2011 11:14 PM</span>
+        <span class="answersCount"><%= question.answers.size.to_s() %> replies</span>,
+        latest by <span class="questionAuthor"><%=
+          if question.answers.size == 0
+            question.owner.name
+          else
+            question.answers.last.owner.name
+          end %>
+        </span> on
+        <span class="time"><%= question.created_at.strftime("%B %d, %Y %I:%M:%S %p") %></span>
 
         <%= actions_for_question question %>
       </p>
@@ -17,3 +23,4 @@
   <% end %>
 
 </div>
+

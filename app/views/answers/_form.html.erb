@@ -3,7 +3,7 @@
 </div>
 
 <div id="messageBody">
-  <%= form_for [question, answer] do |f| %>
+  <%= form_for(@answer) do |f| %>
     <%= f.error_messages %>
 
     <div class="field">
@@ -18,3 +18,4 @@
 </div>
 
 <%= clearfix %>
+
